@@ -1,0 +1,15 @@
+.header {
+    background-color: #1d5f25;
+    max-height: 75px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid aqua;
+}
+
+.App-logo {
+    width: 100px;
+}
+
+.blogName {
+    margin-right: 50px;
+}

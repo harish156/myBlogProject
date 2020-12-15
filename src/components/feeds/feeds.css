@@ -1,0 +1,33 @@
+.feeds {
+    margin-top : 40px;
+    padding : 0px 100px;
+}
+
+.comment {
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.commentBody {
+    padding-bottom: 10px;
+}
+
+.like, .edit {
+    height: 15px;
+}
+
+.likeButton, .editButton{
+    margin-left: 10px;
+    border-radius : 5px;
+}
+
+.commentDetails {
+    display: flex;
+    font-size: small;
+}
+
+.likes {
+    margin-left: auto;
+}

@@ -1,0 +1,14 @@
+.navItem {
+    min-width: 100px;
+    align-self: center;
+    border-right: 1px solid;
+    margin: auto;
+}
+
+.navItem h2 {
+  text-align: center;
+}
+
+.navItem:hover {
+    background-color: #65966b;
+}

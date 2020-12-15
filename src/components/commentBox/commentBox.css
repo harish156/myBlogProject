@@ -1,0 +1,8 @@
+.addCommentButton {
+    align-self: center;
+}
+
+.commentBoxSection {
+    display: flex;
+    margin-bottom: 10px;
+}

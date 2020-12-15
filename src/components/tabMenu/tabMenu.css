@@ -1,0 +1,14 @@
+.tabMenu .tabItem {
+    line-height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.tabMenu .tabItem:hover {
+    background-color: #65966b;
+}
+
+.active {
+  background-color: #4CAF50;
+}
