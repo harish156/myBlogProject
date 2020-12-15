@@ -1,68 +1,117 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Overview
+This is a simple single page Web Application project which is a personal blog. Main idea is to learn  about design and programming in React JS Component Framework, use MongoDB  and get familiar with Front End techniques like CSS and HTML tags.
 
-## Available Scripts
+Technologies Used
+React JS, HTML, CSS , MongoDB, Express JS.
 
-In the project directory, you can run:
+Setup
+Project folder -> cool-blog 
 
-### `npm start`
+Go to /cool-blog.
+Run ‘npm start’.
+App opens in localhost:3000.
+Backend server that connects to the MongoDB and starts the REST API service - ‘node server.js’.
+Connecting to MongoDB Compass - Data Tool - Open Compass -> Connection URI for localhost default mongodb - ‘mongodb://localhost’.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Architecture
 
-### `npm test`
+App
+|
+|______ Header _____ NavBar ___ NavItem
+|
+|______ Main
+              |
+              |______  Left Panel  ________ TabMenu
+              |
+              |______  Right Panel
+                              |
+                              |___ Article
+                              |
+                              |___ Feed
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+App - Backbone container of the whole application. It contains the Header and Main components.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Header - Contains the Nav Bar where there are certain Nav Items which represents the content of the Main panel of the application. For eg: Travel, Movies, Food, Tech, etc.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Main - It represents the main content of the blog topic, that is currently in view.It has a left panel and right  panel.
 
-### `npm run eject`
+Left Panel  -  It represents the list of articles(which forms the Tab Menu) published under the blog topic.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Right Panel - It represents the Article content and the Feed Area where the feed for the content is loaded.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Feed - Should have a post window where a user can post a comment and this is followed by  a list of comments. The comments are all listed in chronological order with likes and dislikes count.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Flow When User selects an Article
 
-### Code Splitting
+The communication from the Left Panel to Right panel is now enabled via the props(bottom to  top) and via the References(Top to bottom).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The Right Panel component maintains a map of articles
 
-### Analyzing the Bundle Size
+	this.articleMap  = {
+	        'Travel' : {
+	        	1 : Yosemite,
+	        	2 : Pfeifer
+	        }
+	    };
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+ And also a state which represents what is the current topic and article being presented to the user.
+		
+this.state = {'topic' : 'Travel', 'article' : 1, 'articleId' : "5e12d5cd18c4a90deb86e964"};
 
-### Making a Progressive Web App
+Backend APIs
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+ /* Model for the Blog post. Each blog post has an entry of title and comments.
+ The comments is an array of objects where each object represents the comment's
+ body, date and number of likes. */
+ 
+let BlogPost = new Schema({
+    title: String,
+    comments: [{body: String, date: Date, likes: Number}]
+});
 
-### Advanced Configuration
+The express js library routes the calls to the server to the corresponding mongoose API  calls to the mongoDB.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+API Endpoints are:
+'/:id' - Getting all the data for a post.
+'/addComment/:id' - Adding a comment to a blog post
+'/updateComment/:id' - Updating a comment on a blog post. The actual comment’s index is sent  through the  body  of the request itself.
+'/add' - Add a new post entry in the database.
 
-### Deployment
+Requirements for the App state
+The current Topic  and Article that is in view.
+Map of Topics -> Articles
+When a user clicks a Topic, Nav bar needs to know the map and update the state.  The main content needs to update the article. The left panel has to update the  article list.
+When a user clicks an Article, left panel needs to know the map and update the state. Right panel has to update the content.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+       
+Resources and Helpful Links
 
-### `npm run build` fails to minify
+Communication between components in ReactJS
+https://blog.bitsrc.io/react-communication-between-components-c0cfccfa996a
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Handling events in React
+https://reactjs.org/docs/handling-events.html
+
+How the browser rendering works?
+https://blog.logrocket.com/how-browser-rendering-works-behind-the-scenes-6782b0e8fb10/
+
+https://medium.com/@mustafa.abdelmogoud/how-the-browser-renders-html-css-27920d8ccaa6
+
+
+Redux  
+https://redux.js.org/tutorials/essentials/part-1-overview-concepts
+
+
+
+
+
+
+
+
